@@ -31,6 +31,14 @@ const ListaDeTarefas = () => {
     return usuario ? usuario.name : 'Usuário Desconhecido';
   };
 
+  const concluirTarefa = (id) => {
+    setTarefas(
+      tarefas.map((tarefa) =>
+        tarefa.id === id ? { ...tarefa, completed: true } : tarefa
+      )
+    );
+  };
+
   return (
     <div>
       <div className="tarefas-completas">
@@ -52,9 +60,9 @@ const ListaDeTarefas = () => {
           {tarefas
             .filter((tarefa) => !tarefa.completed)
             .map((tarefa) => (
-              <li key={tarefa.id}>
-                {obterNomeUsuario(tarefa.userId)} - {tarefa.title}
-              </li>
+              <li key={tarefa.id} onClick={() => concluirTarefa(tarefa.id)}>
+              {obterNomeUsuario(tarefa.userId)} - {tarefa.title}
+            </li>
             ))}
         </ul>
       </div>
